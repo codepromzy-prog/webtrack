@@ -13423,21 +13423,8 @@ const Gh = [
 						}),
 					],
 				}),
-				f.jsxs("div", {
-					className:
-						"flex flex-col items-center justify-center p-6 mt-4 bg-neutral-800 border border-gray-700 rounded-2xl",
-					children: [
-						f.jsx("img", {
-							src: "/globe.svg",
-							alt: "Globe Icon",
-							className: "w-16 h-16 mb-2",
-						}),
-						f.jsx("p", {
-							className: "text-white text-sm text-center",
-							children: "Connect your wallet to get started",
-						}),
-					],
-				}),
+
+
 			],
 		}),
 	Cn = ({ isOpen: N, onClose: C }) => {
